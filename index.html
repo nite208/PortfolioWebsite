@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nitesh Kumawat — AI Engineer</title>
+<meta name="description" content="Nitesh Kumawat — AI Engineer specializing in Generative AI, Agentic Systems, and ML Engineering." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0A2038;
+    --bg-deep: #071729;
+    --surface: #0F2D4A;
+    --grid-line: rgba(160, 200, 240, 0.08);
+    --grid-line-strong: rgba(160, 200, 240, 0.16);
+    --ink: #E7F0FC;
+    --ink-muted: #7FA0C2;
+    --ink-faint: #4C6B8A;
+    --accent: #FF7A50;
+    --accent-dim: rgba(255, 122, 80, 0.16);
+    --safe: #6FE3C4;
+    --border: rgba(160, 200, 240, 0.22);
+    --border-strong: rgba(160, 200, 240, 0.4);
+    --radius: 2px;
+    --max-w: 1040px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 32px 32px;
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection{ background: var(--accent); color: var(--bg-deep); }
+
+  a{ color: inherit; }
+
+  .mono{ font-family: 'IBM Plex Mono', monospace; }
+
+  .wrap{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* corner ticks — drafting mark motif, reused as the page's signature */
+  .ticked{
+    position: relative;
+  }
+  .ticked::before, .ticked::after,
+  .ticked .tick-br, .ticked .tick-bl{
+    content:"";
+    position:absolute;
+    width: 14px; height: 14px;
+    border-color: var(--border-strong);
+    border-style: solid;
+  }
+  .ticked::before{ top:-1px; left:-1px; border-width: 1px 0 0 1px; }
+  .ticked::after{ top:-1px; right:-1px; border-width: 1px 1px 0 0; }
+  .ticked .tick-bl{ bottom:-1px; left:-1px; border-width: 0 0 1px 1px; }
+  .ticked .tick-br{ bottom:-1px; right:-1px; border-width: 0 1px 1px 0; }
+
+  /* ---------- nav ---------- */
+  header{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(7, 23, 41, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height: 64px;
+  }
+  .brand{
+    font-weight:600; letter-spacing: 0.02em; font-size: 15px;
+    text-decoration:none; display:flex; align-items:center; gap:8px;
+  }
+  .brand .dot{ width:8px; height:8px; background: var(--accent); display:inline-block; }
+  .navlinks{ display:flex; gap:28px; list-style:none; margin:0; padding:0; }
+  .navlinks a{
+    text-decoration:none; color: var(--ink-muted); font-size: 13px;
+    font-family:'IBM Plex Mono', monospace; letter-spacing:0.03em;
+    transition: color .15s ease;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{ color: var(--accent); }
+  .navlinks .idx{ color: var(--ink-faint); margin-right:4px; }
+  #navToggle{ display:none; }
+
+  /* ---------- hero ---------- */
+  .hero{ padding: 96px 0 72px; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em;
+    color: var(--accent); text-transform:uppercase; margin:0 0 20px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:""; width:24px; height:1px; background: var(--accent); }
+  h1{
+    font-size: clamp(38px, 6vw, 64px); line-height: 1.04; margin: 0 0 20px;
+    font-weight: 700; letter-spacing: -0.01em; max-width: 14ch;
+  }
+  h1 .accent{ color: var(--accent); }
+  .lede{
+    color: var(--ink-muted); font-size: 17px; max-width: 54ch; margin: 0 0 36px;
+  }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom: 56px; }
+  .btn{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:0.03em;
+    padding: 12px 20px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    border: 1px solid var(--border-strong); transition: all .15s ease;
+  }
+  .btn-primary{ background: var(--accent); color: var(--bg-deep); border-color: var(--accent); font-weight:600; }
+  .btn-primary:hover{ background: #ff8f6b; }
+  .btn-ghost{ color: var(--ink); }
+  .btn-ghost:hover{ border-color: var(--accent); color: var(--accent); }
+
+  /* title block — signature element, echoed in hero + footer */
+  .titleblock{
+    border: 1px solid var(--border);
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 720px;
+  }
+  .titleblock .cell{
+    padding: 14px 16px;
+    border-right: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+  }
+  .titleblock .cell:nth-child(4n){ border-right:none; }
+  .titleblock .cell:nth-child(-n+4){ border-top:none; }
+  .titleblock .label{
+    font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.1em;
+    color: var(--ink-faint); text-transform:uppercase; margin-bottom:6px;
+  }
+  .titleblock .value{ font-size:13px; font-family:'IBM Plex Mono', monospace; color: var(--ink); }
+  .titleblock .value a{ text-decoration:none; }
+  .titleblock .value a:hover{ color: var(--accent); }
+
+  /* ---------- section shell ---------- */
+  section{ padding: 64px 0; border-top: 1px solid var(--border); }
+  .sec-head{ display:flex; align-items:baseline; gap:16px; margin-bottom: 40px; }
+  .sec-num{ font-family:'IBM Plex Mono', monospace; color: var(--accent); font-size:13px; }
+  .sec-title{ font-size: 22px; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  .sec-line{ flex:1; height:1px; background: var(--border); }
+
+  /* ---------- skills as legend ---------- */
+  .legend{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1px; background: var(--border); border:1px solid var(--border); }
+  .legend-group{ background: var(--bg); padding: 22px; }
+  .legend-group .glabel{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; color: var(--accent);
+    letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px; display:block;
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color: var(--ink-muted);
+    border:1px solid var(--border); padding:5px 10px;
+  }
+
+  /* ---------- projects as schematic panels ---------- */
+  .project{ margin-bottom: 56px; }
+  .project:last-child{ margin-bottom:0; }
+  .p-head{ display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:16px; }
+  .p-title{ font-size:20px; font-weight:600; margin:0; }
+  .p-status{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.06em;
+    color: var(--safe); border:1px solid rgba(111,227,196,0.4); padding:4px 9px; text-transform:uppercase; white-space:nowrap;
+  }
+  .p-stack{ font-family:'IBM Plex Mono', monospace; font-size:12px; color: var(--ink-faint); margin: 0 0 22px; }
+  .p-desc{ color: var(--ink-muted); font-size:14.5px; max-width: 62ch; margin: 0 0 24px; }
+
+  /* pipeline diagram */
+  .pipeline{
+    display:flex; align-items:center; overflow-x:auto; padding: 22px 20px;
+    border: 1px solid var(--border); background: var(--surface); margin-bottom: 20px;
+  }
+  .node{
+    flex: 0 0 auto; padding: 10px 14px; border: 1px dashed var(--border-strong);
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color: var(--ink);
+    white-space: nowrap; background: var(--bg-deep);
+  }
+  .arrow{ flex: 0 0 auto; width: 28px; height:1px; background: var(--ink-faint); position:relative; margin: 0 4px; }
+  .arrow::after{
+    content:""; position:absolute; right:0; top:50%; transform:translateY(-50%);
+    border: 4px solid transparent; border-left-color: var(--ink-faint);
+  }
+
+  .specs{ display:flex; flex-wrap:wrap; gap: 10px; }
+  .spec{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px;
+    border-left: 2px solid var(--accent); padding: 6px 12px; background: var(--surface);
+    color: var(--ink-muted);
+  }
+  .spec b{ color: var(--ink); font-weight:600; }
+  .p-links{ margin-top:18px; display:flex; gap:16px; }
+  .p-links a{ font-family:'IBM Plex Mono', monospace; font-size:12px; text-decoration:none; color: var(--ink-muted); border-bottom:1px solid var(--border-strong); padding-bottom:2px; }
+  .p-links a:hover{ color: var(--accent); border-color: var(--accent); }
+
+  /* ---------- experience / timeline ---------- */
+  .role{ display:grid; grid-template-columns: 140px 1fr; gap: 24px; margin-bottom: 40px; }
+  .role:last-child{ margin-bottom:0; }
+  .role-date{ font-family:'IBM Plex Mono', monospace; font-size:12px; color: var(--ink-faint); padding-top:3px; }
+  .role-org{ font-size:13px; color: var(--accent); font-family:'IBM Plex Mono', monospace; margin: 2px 0 12px; }
+  .role h3{ margin:0; font-size:17px; font-weight:600; }
+  .role ul{ margin: 10px 0 0; padding-left: 18px; color: var(--ink-muted); font-size:14px; }
+  .role li{ margin-bottom:6px; }
+
+  /* ---------- achievements ---------- */
+  .achv-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:1px; background: var(--border); border:1px solid var(--border); }
+  .achv{ background: var(--bg); padding:22px; }
+  .achv .num{ font-family:'IBM Plex Mono', monospace; color: var(--accent); font-size:12px; display:block; margin-bottom:10px; }
+  .achv p{ margin:0; font-size:13.5px; color: var(--ink-muted); }
+  .achv strong{ color: var(--ink); }
+
+  /* ---------- footer ---------- */
+  footer{ padding: 64px 0 48px; }
+  footer .titleblock{ max-width: 100%; margin-bottom: 28px; }
+  .foot-note{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color: var(--ink-faint); }
+
+  @media (max-width: 720px){
+    .navlinks{ display:none; }
+    .titleblock{ grid-template-columns: repeat(2,1fr); }
+    .titleblock .cell:nth-child(2n){ border-right:none; }
+    .titleblock .cell:nth-child(-n+2){ border-top:none; }
+    .role{ grid-template-columns: 1fr; gap:6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; }
+  }
+
+  [data-reveal]{ opacity:0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+  [data-reveal].in{ opacity:1; transform:none; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a class="brand" href="#top"><span class="dot"></span>NITESH KUMAWAT</a>
+    <ul class="navlinks">
+      <li><a href="#skills"><span class="idx">01</span>Skills</a></li>
+      <li><a href="#projects"><span class="idx">02</span>Projects</a></li>
+      <li><a href="#experience"><span class="idx">03</span>Experience</a></li>
+      <li><a href="#achievements"><span class="idx">04</span>Achievements</a></li>
+      <li><a href="#contact"><span class="idx">05</span>Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="wrap hero">
+    <p class="eyebrow">AI Engineer — GenAI · Agentic Systems · ML</p>
+    <h1>I build systems that <span class="accent">reason, score, and act</span> — not just predict.</h1>
+    <p class="lede">
+      Computer Engineering graduate (Honours in Data Science) focused on agentic AI pipelines, RAG systems,
+      and production ML — from a multi-agent security platform to a real-time fraud-scoring engine.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#projects">View Projects →</a>
+      <a class="btn btn-ghost" href="resume.pdf" download>Download Résumé</a>
+      <a class="btn btn-ghost" href="mailto:niteshkumawat2331@gmail.com">Get in Touch</a>
+    </div>
+
+    <div class="titleblock ticked"><span class="tick-br"></span><span class="tick-bl"></span>
+      <div class="cell"><div class="label">Based in</div><div class="value">Pune, India</div></div>
+      <div class="cell"><div class="label">Focus</div><div class="value">GenAI / Agentic AI</div></div>
+      <div class="cell"><div class="label">Status</div><div class="value">Open to roles</div></div>
+      <div class="cell"><div class="label">Contact</div><div class="value"><a href="mailto:niteshkumawat2331@gmail.com">Email →</a></div></div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num mono">01</span><h2 class="sec-title">Skills</h2><div class="sec-line"></div></div>
+      <div class="legend">
+        <div class="legend-group">
+          <span class="glabel">ML · CV · Generative AI</span>
+          <div class="chips">
+            <span class="chip">Machine Learning</span><span class="chip">Deep Learning</span>
+            <span class="chip">CNN</span><span class="chip">RNN</span><span class="chip">NLP</span>
+            <span class="chip">YOLO</span><span class="chip">XGBoost</span><span class="chip">TensorFlow</span>
+            <span class="chip">PyTorch</span><span class="chip">RAG</span><span class="chip">LangChain</span>
+            <span class="chip">LangGraph</span><span class="chip">Prompt Engineering</span>
+            <span class="chip">FAISS</span><span class="chip">ChromaDB</span>
+          </div>
+        </div>
+        <div class="legend-group">
+          <span class="glabel">Programming &amp; Backend</span>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">Java</span><span class="chip">SQL</span>
+            <span class="chip">FastAPI</span><span class="chip">REST APIs</span><span class="chip">WebSockets</span>
+          </div>
+        </div>
+        <div class="legend-group">
+          <span class="glabel">Data Engineering &amp; MLOps</span>
+          <div class="chips">
+            <span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">MLflow</span>
+            <span class="chip">Redis</span><span class="chip">Kafka</span><span class="chip">Data Pipelines</span>
+            <span class="chip">Model Deployment</span>
+          </div>
+        </div>
+        <div class="legend-group">
+          <span class="glabel">Tools &amp; Visualization</span>
+          <div class="chips">
+            <span class="chip">MySQL</span><span class="chip">PostgreSQL</span><span class="chip">Git</span>
+            <span class="chip">Docker</span><span class="chip">Vercel</span><span class="chip">React</span>
+            <span class="chip">Streamlit</span><span class="chip">Power BI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num mono">02</span><h2 class="sec-title">Projects</h2><div class="sec-line"></div></div>
+
+      <!-- SecureIQ -->
+      <div class="project">
+        <div class="p-head">
+          <h3 class="p-title">SecureIQ</h3>
+          <span class="p-status">Deployed</span>
+        </div>
+        <p class="p-stack mono">LangGraph · LlamaIndex · ChromaDB · Llama 3.2 (LoRA/Unsloth) · Docker → Railway</p>
+        <p class="p-desc">
+          LLM-native security intelligence platform. A multi-agent LangGraph pipeline investigates alerts
+          autonomously — retrieving from a 200+ record NVD CVE knowledge base, scoring risk, and filing
+          structured incident reports, cutting per-alert SOC investigation time from 20–40 minutes to under 30 seconds.
+        </p>
+        <div class="pipeline mono">
+          <div class="node">Alert In</div><div class="arrow"></div>
+          <div class="node">Search KB (RAG)</div><div class="arrow"></div>
+          <div class="node">Score Risk 0–100</div><div class="arrow"></div>
+          <div class="node">Generate Report</div><div class="arrow"></div>
+          <div class="node">Telegram Alert</div>
+        </div>
+        <div class="specs">
+          <div class="spec"><b>20–40 min → &lt;30 sec</b> investigation time</div>
+          <div class="spec"><b>8/8</b> core test cases passing</div>
+          <div class="spec"><b>200+</b> CVE records indexed</div>
+        </div>
+        <div class="p-links">
+          <a href="https://github.com/nite208/secureiq" target="_blank" rel="noopener">GitHub Repo ↗</a>
+        </div>
+      </div>
+
+      <!-- UPI Fraud -->
+      <div class="project">
+        <div class="p-head">
+          <h3 class="p-title">UPI Fraud Detection &amp; Risk Intelligence Platform</h3>
+          <span class="p-status">In Progress</span>
+        </div>
+        <p class="p-stack mono">FastAPI · XGBoost · LangChain · Redis · SHAP · Groq</p>
+        <p class="p-desc">
+          Real-time fraud-scoring pipeline for UPI transactions. Combines an ML ensemble, graph analysis,
+          and anomaly detection into one composite risk score, with an LLM-powered investigation assistant
+          for explaining flagged cases to analysts.
+        </p>
+        <div class="pipeline mono">
+          <div class="node">Transaction In</div><div class="arrow"></div>
+          <div class="node">XGBoost + RF Score</div><div class="arrow"></div>
+          <div class="node">Isolation Forest</div><div class="arrow"></div>
+          <div class="node">Composite Risk</div><div class="arrow"></div>
+          <div class="node">SHAP Explain</div>
+        </div>
+        <div class="specs">
+          <div class="spec"><b>0.9621</b> PR-AUC</div>
+          <div class="spec"><b>13</b> REST endpoints</div>
+          <div class="spec">ML 40% · Graph 35% · Anomaly 25%</div>
+        </div>
+        <div class="p-links">
+          <a href="https://github.com/nite208/upi-fraud-platform" target="_blank" rel="noopener">GitHub Repo ↗</a>
+        </div>
+      </div>
+
+      <!-- Vyapar AI -->
+      <div class="project">
+        <div class="p-head">
+          <h3 class="p-title">Vyapar AI</h3>
+          <span class="p-status">Deployed</span>
+        </div>
+        <p class="p-stack mono">TanStack Start (SSR) · Neon PostgreSQL · Groq LLM · Vercel</p>
+        <p class="p-desc">
+          Full-stack AI business intelligence SaaS for non-technical users. Upload business data and ask
+          questions in plain English or Hindi — the system parses, queries, and charts the answer automatically.
+        </p>
+        <div class="pipeline mono">
+          <div class="node">Upload CSV/Excel/PDF</div><div class="arrow"></div>
+          <div class="node">Parse &amp; Structure</div><div class="arrow"></div>
+          <div class="node">NL Query (Groq)</div><div class="arrow"></div>
+          <div class="node">Chart + PDF Export</div>
+        </div>
+        <div class="specs">
+          <div class="spec">Bilingual: <b>English / Hindi</b></div>
+          <div class="spec">Bring-your-own-key credential model</div>
+          <div class="spec">SSR + client credential-exposure hardened</div>
+        </div>
+        <div class="p-links">
+          <a href="https://github.com/nite208/VyaparAI" target="_blank" rel="noopener">GitHub Repo ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num mono">03</span><h2 class="sec-title">Experience</h2><div class="sec-line"></div></div>
+      <div class="role">
+        <div class="role-date mono">Sep 2025 –<br>Mar 2026</div>
+        <div>
+          <h3>AI/ML Intern</h3>
+          <p class="role-org">ThynkTech India</p>
+          <ul>
+            <li>Worked on an EdTech reading-assessment product using audio-video ML/DL to detect pronunciation accuracy as students read aloud, supporting student practice and teacher-facing analytics.</li>
+            <li>Prepared and validated structured JSON datasets (text-audio alignment, pronunciation labels) used for training and evaluating the reading-assessment model, across Agile sprints with a cross-functional team.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num mono">04</span><h2 class="sec-title">Leadership, Achievements &amp; Publications</h2><div class="sec-line"></div></div>
+      <div class="achv-grid">
+        <div class="achv">
+          <span class="num mono">100+</span>
+          <p><strong>Placement Coordinator</strong> — Student Progression &amp; Corporate Relations Cell, ISBM (Aug 2024–Jun 2026). Coordinated placement drives for 100+ students, liaised with recruiters, ran resume/interview-prep sessions.</p>
+        </div>
+        <div class="achv">
+          <span class="num mono">200+</span>
+          <p><strong>Google Student Ambassador (AI/Gemini)</strong> — Promoted adoption of Google's AI tools through campus outreach and demos, reaching 200+ students.</p>
+        </div>
+        <div class="achv">
+          <span class="num mono">96%</span>
+          <p><strong>Hackathon &amp; Datathon</strong> — 2nd Runner-up, All India Hackathon ASTITVA (100+ teams); Runner-up, Datathon 2025 with a Human/AI text detection model at 96% accuracy.</p>
+        </div>
+        <div class="achv">
+          <span class="num mono">2026</span>
+          <p><strong>Publication</strong> — Co-author, "Hyperlocal AI-Based Disaster Risk Prediction and Personalized System for MSMEs," Metszet Journal, Vol. 11, Issue 5, pp. 179–184.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FOOTER -->
+  <footer id="contact">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num mono">05</span><h2 class="sec-title">Contact</h2><div class="sec-line"></div></div>
+      <div class="titleblock ticked"><span class="tick-br"></span><span class="tick-bl"></span>
+        <div class="cell"><div class="label">Name</div><div class="value">Nitesh Kumawat</div></div>
+        <div class="cell"><div class="label">Email</div><div class="value"><a href="mailto:niteshkumawat2331@gmail.com">niteshkumawat2331@gmail.com</a></div></div>
+        <div class="cell"><div class="label">Phone</div><div class="value">+91 9975996544</div></div>
+        <div class="cell"><div class="label">LinkedIn</div><div class="value"><a href="https://www.linkedin.com/in/nitesh-kumawat-185356289/" target="_blank" rel="noopener">Profile ↗</a></div></div>
+        <div class="cell"><div class="label">GitHub</div><div class="value"><a href="https://github.com/nite208" target="_blank" rel="noopener">nite208 ↗</a></div></div>
+        <div class="cell"><div class="label">Résumé</div><div class="value"><a href="resume.pdf" download>Download PDF</a></div></div>
+        <div class="cell"><div class="label">Education</div><div class="value">B.E. Computer Engg (DS)</div></div>
+        <div class="cell"><div class="label">Location</div><div class="value">Pune, India</div></div>
+      </div>
+      <p class="foot-note" style="margin-top:28px;">© 2026 Nitesh Kumawat — built as a static page, deployable via GitHub Pages or Vercel.</p>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  // reveal-on-scroll for sections (respects reduced motion via CSS media query disabling transitions)
+  document.querySelectorAll('section, .hero').forEach(el => el.setAttribute('data-reveal',''));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
